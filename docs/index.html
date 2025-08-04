@@ -19,12 +19,258 @@
 		<meta property="og:image:type" content="image/jpeg">
 		<meta property="og:image:width" content="1280">
 		<meta property="og:image:height" content="800">
-		<link rel="icon" type="image/png" href="images/arium-temp-favicon.png">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<!-- <link rel="icon" type="image/png" href="images/arium-temp-favicon.png"> -->
+		<link rel="icon" type="image/png" href="/images/favicons/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/images/favicons/favicon.svg" />
+    <link rel="shortcut icon" href="/images/favicons/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="MyWebSite" />
+    <link rel="manifest" href="/images/favicons/site.webmanifest" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     	<link href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter:ital,wght@0,400;1,400" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		
+		<!-- Modal Styles -->
+		<style>
+			.modal {
+				display: none;
+				position: fixed;
+				z-index: 10000;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				overflow: auto;
+				background-color: rgba(0,0,0,0.8);
+				backdrop-filter: blur(5px);
+			}
+
+			.modal-content {
+				background-color: #fefefe;
+				margin: 2% auto;
+				padding: 0;
+				border: none;
+				border-radius: 10px;
+				width: 90%;
+				max-width: 900px;
+				position: relative;
+				box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+			}
+
+			.close {
+				color: #aaa;
+				float: right;
+				font-size: 28px;
+				font-weight: bold;
+				position: absolute;
+				right: 15px;
+				top: 10px;
+				z-index: 10001;
+				cursor: pointer;
+				background: rgba(255,255,255,0.9);
+				border-radius: 50%;
+				width: 35px;
+				height: 35px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				line-height: 1;
+			}
+
+			.close:hover,
+			.close:focus {
+				color: #000;
+				text-decoration: none;
+				background: rgba(255,255,255,1);
+			}
+
+			#calendly-inline-widget {
+				border-radius: 10px;
+				overflow: hidden;
+			}
+
+			/* Selection Modal Styles */
+			.selection-modal {
+				max-height: 90vh;
+				overflow-y: auto;
+			}
+
+			.selection-content {
+				padding: 30px;
+				text-align: center;
+			}
+
+			.selection-content h2 {
+				color: #333;
+				margin-bottom: 10px;
+				font-size: 2em;
+			}
+
+			.selection-content > p {
+				color: #666;
+				margin-bottom: 20px;
+				font-size: 1.1em;
+			}
+
+			.value-proposition {
+				background: linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%);
+				border: 1px solid #d4edda;
+				border-radius: 12px;
+				padding: 15px 20px;
+				margin: 10px 0 25px 0;
+				text-align: center;
+				color: #155724;
+				font-size: 0.95em;
+				line-height: 1.4;
+				box-shadow: 0 2px 8px rgba(40, 167, 69, 0.1);
+			}
+
+			.value-proposition strong {
+				color: #0f5132;
+				font-weight: 600;
+			}
+
+			.consultation-options {
+				display: flex;
+				flex-direction: column;
+				gap: 20px;
+				align-items: center;
+			}
+
+			.consultation-option {
+				background: #f8f9fa;
+				border: 2px solid #e9ecef;
+				border-radius: 15px;
+				padding: 25px;
+				width: 100%;
+				max-width: 500px;
+				cursor: pointer;
+				transition: all 0.3s ease;
+				text-align: left;
+			}
+
+			.consultation-option:hover {
+				border-color: #007bff;
+				transform: translateY(-5px);
+				box-shadow: 0 8px 25px rgba(0,123,255,0.15);
+			}
+
+			.consultation-option h3 {
+				color: #333;
+				margin-bottom: 15px;
+				font-size: 1.4em;
+				text-align: center;
+				font-weight: 600;
+			}
+
+			.price-only {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				/* margin-bottom: 15px; */
+				/* padding: 10px 15px; */
+				/* background: rgba(0,123,255,0.1); */
+				border-radius: 10px;
+			}
+
+			.price-info {
+				display: flex;
+				align-items: center;
+				gap: 8px;
+				justify-content: center;
+			}
+
+			.flag-emoji {
+				font-size: 1.2em;
+				display: inline-block;
+			}
+
+			.price {
+				color: #28a745;
+				font-weight: bold;
+				font-size: 1.2em;
+			}
+
+			.consultation-option .description {
+				color: #666;
+				margin-bottom: 20px;
+				line-height: 1.5;
+				text-align: left;
+			}
+
+			.consultation-btn {
+				display: inline-block;
+				padding: 12px 24px;
+				margin-top: 10px;
+				background: #dfedfb;
+				color: #333;
+				border: 2px solid #e9ecef;
+				border-radius: 8px;
+				font-size: 1em;
+				font-weight: 600;
+				cursor: pointer;
+				transition: all 0.3s ease;
+				pointer-events: none; /* Prevents button click, keeps div clickable */
+				text-align: center;
+				text-decoration: none;
+				user-select: none;
+			}
+
+			.consultation-option .consultation-btn {
+				display: block;
+				text-align: center;
+				margin: 10px auto 0;
+				width: fit-content;
+				min-width: 200px;
+			}
+
+			.consultation-option:hover .consultation-btn {
+				background: #ffffff;
+				border-color: #007bff;
+				color: #007bff;
+				transform: translateY(-1px);
+			}
+
+			@media screen and (max-width: 768px) {
+				.modal-content {
+					margin: 5% auto;
+					width: 95%;
+				}
+				
+				#calendly-inline-widget {
+					height: 550px !important;
+				}
+
+				.consultation-options {
+					gap: 15px;
+				}
+
+				.consultation-option {
+					max-width: 100%;
+					padding: 20px;
+				}
+
+				.price-only {
+					padding: 8px 12px;
+				}
+
+				.selection-content {
+					padding: 20px;
+				}
+
+				.selection-content h2 {
+					font-size: 1.5em;
+				}
+
+				.value-proposition {
+					padding: 12px 16px;
+					margin: 8px 0 20px 0;
+					font-size: 0.9em;
+				}
+			}
+		</style>
 	</head>
 	<body>
 
@@ -37,7 +283,7 @@
  							<span class="icon fa-diamond"></span> 
 							<img src="images/temp-logo-1.png" alt="Temp Logo"/>
 						</div>-->
-						<div class="logo" style="width: 10em; height: 10em; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; background-color: #eee;">
+						<div class="logo" style="width: 10em; height: 10em; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; background-color: #ffffff;">
 						  <img src="images/temp-logo-2.png" alt="Temp Logo" style="width: 100%; height: 100%; object-fit: cover;" />
 						</div>
 
@@ -58,8 +304,9 @@
 									Welcome to Arium Immigration.
 								</p>
 								<p style="line-height: 1;">&nbsp;</p>
-								 <ul class="actions vertical">
-									<li><a href="https://calendly.com/ariumimmigration-info/20mins" target="_blank" class="button special">Book a consultation</a></li>
+								 <ul class="actions horizontal">
+									<li><a href="#" onclick="openConsultationSelection()" class="button special">Book a consultation</a></li>
+									<!-- <li><a href="#" onclick="openCalendlyModal(40)" class="button special">Book a 40minconsultation</a></li> -->
 								</ul>
 							</div>
 						</div>
@@ -89,11 +336,64 @@
 		<!-- BG -->
 			<div id="bg"></div>
 
+		<!-- Consultation Selection Modal -->
+		<div id="consultation-selection-modal" class="modal">
+			<div class="modal-content selection-modal">
+				<span class="close" onclick="closeConsultationSelection()">&times;</span>
+				<div class="selection-content">
+					<h2>Choose Your Consultation</h2>
+					<p>Select the consultation type that best fits your needs:</p>
+					
+					<div class="value-proposition">
+						<strong>You're in Good Hands:</strong>
+						If you proceed with a service registration within 10 days of your consultation, the consultation fee will be credited toward the total service cost.
+					</div>
+					
+					<div class="consultation-options">
+						<div class="consultation-option" onclick="selectConsultation(20)">
+							<h3>20-Minute Consultation</h3>
+							<div class="price-only">
+								<div class="price-info">
+									<!-- <span class="flag-emoji">🇨🇦</span> -->
+									<span class="price">$75 CAD</span>
+								</div>
+							</div>
+							<p class="description">Perfect for quick questions and initial guidance on your immigration journey.</p>
+							<span class="consultation-btn">Book Now</span>
+						</div>
+						
+						<div class="consultation-option" onclick="selectConsultation(40)">
+							<h3>40-Minute Consultation</h3>
+							<div class="price-only">
+								<div class="price-info">
+									<!-- <span class="flag-emoji">🇨🇦</span> -->
+									<span class="price">$150 CAD</span>
+								</div>
+							</div>
+							<p class="description">Comprehensive discussion for detailed planning and strategy development.</p>
+							<span class="consultation-btn">Book Now</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Calendly Modal -->
+		<div id="calendly-modal" class="modal">
+			<div class="modal-content">
+				<span class="close" onclick="closeCalendlyModal()">&times;</span>
+				<div id="calendly-inline-widget" style="min-width:320px;height:630px;"></div>
+			</div>
+		</div>
+
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/skel.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			
+			<!-- Calendly embed script -->
+			<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js"></script>
 			<script>
 				// Load section content dynamically
 				$(function() {
@@ -136,6 +436,52 @@
 						});
 					});
 				});
+
+				// Calendly Modal Functions
+				function openCalendlyModal(duration=20) {
+					document.getElementById('calendly-modal').style.display = 'block';
+					// Initialize Calendly widget if not already done
+					if (!window.calendlyInitialized || window.calendlyInitialized !== duration) {
+						document.getElementById('calendly-inline-widget').innerHTML = ''; // Clear the widget, just in case
+            Calendly.initInlineWidget({
+							url: `https://calendly.com/ariumimmigration-info/${duration}mins`,
+							parentElement: document.getElementById('calendly-inline-widget'),
+							prefill: {},
+							utm: {}
+						});
+						window.calendlyInitialized = duration;
+					}
+				}
+
+				function closeCalendlyModal() {
+					document.getElementById('calendly-modal').style.display = 'none';
+				}
+
+				// Consultation Selection Modal Functions
+				function openConsultationSelection() {
+					document.getElementById('consultation-selection-modal').style.display = 'block';
+				}
+
+				function closeConsultationSelection() {
+					document.getElementById('consultation-selection-modal').style.display = 'none';
+				}
+
+				function selectConsultation(duration) {
+					closeConsultationSelection();
+					openCalendlyModal(duration);
+				}
+
+				// Close modal when clicking outside of it
+				window.onclick = function(event) {
+					var calendlyModal = document.getElementById('calendly-modal');
+					var selectionModal = document.getElementById('consultation-selection-modal');
+					
+					if (event.target == calendlyModal) {
+						closeCalendlyModal();
+					} else if (event.target == selectionModal) {
+						closeConsultationSelection();
+					}
+				}
 			</script>
 
 	</body>
