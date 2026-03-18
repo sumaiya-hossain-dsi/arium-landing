@@ -341,8 +341,8 @@
 			<div class="modal-content selection-modal">
 				<span class="close" onclick="closeConsultationSelection()">&times;</span>
 				<div class="selection-content">
-					<h2>Choose Your Consultation</h2>
-					<p>Select the consultation type that best fits your needs:</p>
+					<!-- <h2>Choose Your Consultation</h2> -->
+					<!-- <p>Select the consultation type that best fits your needs:</p> -->
 					
 					<div class="value-proposition">
 						<strong>You're in Good Hands:</strong>
@@ -350,7 +350,20 @@
 					</div>
 					
 					<div class="consultation-options">
-						<div class="consultation-option" onclick="selectConsultation(20)">
+						<div class="consultation-option" onclick="selectConsultation(30)">
+							<h3>30-Minute Consultation</h3>
+							<div class="price-only">
+								<div class="price-info">
+									<!-- <span class="flag-emoji">🇨🇦</span> -->
+									<span class="price">$150 CAD</span>
+								</div>
+							</div>
+							<p class="description">A focused session to review your situation and identify the right path forward for your immigration goals.</p>
+							<span class="consultation-btn">Book Now</span>
+						</div>
+
+
+						<div class="consultation-option" style="display: none;" onclick="selectConsultation(20)">
 							<h3>20-Minute Consultation</h3>
 							<div class="price-only">
 								<div class="price-info">
@@ -362,7 +375,7 @@
 							<span class="consultation-btn">Book Now</span>
 						</div>
 						
-						<div class="consultation-option" onclick="selectConsultation(40)">
+						<div class="consultation-option" style="display: none;" onclick="selectConsultation(40)">
 							<h3>40-Minute Consultation</h3>
 							<div class="price-only">
 								<div class="price-info">
